@@ -2,7 +2,7 @@
 
 class ProductController < ApplicationController
   def index
-    @products = Product.all.joins(:reviews).group('products.id').order('avg(reviews.rating) desc')
+    @products = Product.all.joins("LEFT JOIN reviews ON reviews.product_id = products.id").group('products.id').order('avg(reviews.rating) desc')
 
     render json: @products, status: :ok
   end
