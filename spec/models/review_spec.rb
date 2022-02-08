@@ -44,4 +44,14 @@ RSpec.describe Review, :type => :model do
         review = FactoryBot.build(:review, :product_id => product.id, :rating => nil)
         expect(review).to_not be_valid
     end
+
+    it "isn't valid with rating more than 5" do
+        review = FactoryBot.build(:review, :product_id => product.id, :rating => 6)
+        expect(review).to_not be_valid
+    end
+
+    it "isn't valid with rating less than 1" do
+        review = FactoryBot.build(:review, :product_id => product.id, :rating => 0)
+        expect(review).to_not be_valid
+    end
 end
